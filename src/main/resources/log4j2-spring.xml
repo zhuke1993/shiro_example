@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- itemStatus="OFF"，可以去掉，它的含义为是否记录 log4j2 本身的 event 信息，默认是 OFF -->
+<Configuration>
+
+    <!-- 定义下面的引用名(参数) -->
+    <Properties>
+        <Property name="LOG_PATTERN">%d [%t] %p [%c{1}] %m%n</Property>
+        <Property name="LOG_BASE_DIR">/home/logs/shiro_example</Property>
+        <Property name="LOG_FILE_NAME">shiro_example</Property>
+    </Properties>
+
+    <!--先定义所有的 appender -->
+    <Appenders>
+        <RollingFile name="RollingFile" fileName="${LOG_BASE_DIR}/${LOG_FILE_NAME}.log"
+                     filePattern="${LOG_BASE_DIR}/${LOG_FILE_NAME}-%d{yyyy-MM-dd}.log">
+            <PatternLayout charset="UTF-8">
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="ErrorRollingFile" fileName="${LOG_BASE_DIR}/${LOG_FILE_NAME}-err.log"
+                     filePattern="${LOG_BASE_DIR}/${LOG_FILE_NAME}-err-%d{yyyy-MM-dd}.log">
+            <PatternLayout charset="UTF-8">
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+        </RollingFile>
+
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout charset="UTF-8">
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="ErrorRollingFile"/>
+            <AppenderRef ref="ConsoleAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>

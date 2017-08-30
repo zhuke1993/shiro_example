@@ -1,0 +1,55 @@
+group 'com.zhuke.shiro'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+    }
+}
+
+configurations.all {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    exclude group: 'org.springframework.boot', module: 'logback-classic'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.apache.shiro', name: 'shiro-core', version: '1.4.0'
+    compile("org.springframework.boot:spring-boot-starter-web:1.5.2.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-log4j2:1.5.2.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-aop:1.5.2.RELEASE")
+    compile("org.apache.httpcomponents:httpclient:4.5.2")
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.31'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
+    compile group: 'com.google.guava', name: 'guava', version: '21.0'
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.10'
+    compile group: 'commons-logging', name: 'commons-logging', version: '1.2'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-jcl', version: '2.6.2'
+    compile group: 'joda-time', name: 'joda-time', version: '2.9.9'
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.10'
+    compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
+    compile group: 'org.springframework.data', name: 'spring-data-redis', version: '1.8.0.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.5.4.RELEASE'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '1.5.4.RELEASE'
+    compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.1.1'
+    compile group: 'net.spy', name: 'spymemcached', version: '2.12.3'
+
+
+
+    compile fileTree(dir: 'src/main/webapp/WEB-INF/lib', include: '*.jar/')
+
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.3.RELEASE'
+    testCompile group: 'org.testng', name: 'testng', version: '6.11'
+}
