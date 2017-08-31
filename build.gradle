@@ -45,6 +45,10 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '1.5.4.RELEASE'
     compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.1.1'
     compile group: 'net.spy', name: 'spymemcached', version: '2.12.3'
+    compile group: 'org.apache.shiro', name: 'shiro-web', version: '1.4.0'
+    compile group: 'org.apache.shiro', name: 'shiro-spring', version: '1.4.0'
+
+
 
 
 
